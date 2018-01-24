@@ -56,6 +56,7 @@ LOCAL_APPS = [
     # custom users app
     'kellygram.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'kellygram.images.apps.ImagesConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -111,7 +112,6 @@ MANAGERS = ADMINS
 # Uses django-environ to accept uri format
 # See: https://django-environ.readthedocs.io/en/latest/#supported-types
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres://localhost/kellygram'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
