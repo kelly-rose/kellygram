@@ -57,6 +57,7 @@ LOCAL_APPS = [
     'kellygram.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'kellygram.images.apps.ImagesConfig',
+    'rest_framework',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
