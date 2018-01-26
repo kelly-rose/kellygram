@@ -1,12 +1,25 @@
 from rest_framework import serializers
-
+from kellygram.users import models as user_models
 from kellygram.images import models
 
+
+class FeedUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = user_models.User
+        fields = (
+            'username',
+            'profile_image'
+        )
+
 class CommentSerializer(serializers.ModelSerializer):
-    # image = ImageSerializer()
+    creator = FeedUserSerializer(read_only=True)
     class Meta:
         model = models.Comment
-        fields = '__all__'
+        fields = (
+            'id',
+            'message',
+            'creator',
+        )
 
 class LikeSerializer(serializers.ModelSerializer):
     # image = ImageSerializer()
@@ -14,11 +27,9 @@ class LikeSerializer(serializers.ModelSerializer):
         model = models.Like
         fields = '__all__'
 
-
 class ImageSerializer(serializers.ModelSerializer):
     comments=CommentSerializer(many=True)
-    likes = LikeSerializer(many=True)
-
+    creator = FeedUserSerializer()
     class Meta:
         model = models.Image
         fields = (
@@ -27,5 +38,6 @@ class ImageSerializer(serializers.ModelSerializer):
             'location',
             'caption',
             'comments', #comment_set
-            'likes', #like_set
+            'like_count',  #1-40
+            'creator',
         )
